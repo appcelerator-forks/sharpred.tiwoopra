@@ -14,17 +14,17 @@
  * woopra.
  */
 
-var http = require('../../libs/httpClient');
-var https = require('../../libs/httpClient');
+var http = require('./httpClient');
+var https = require('./httpClient');
 
 var _extend = require('util')._extend;
 
-var _config  = {
-        ssl: true
-    },
+var _config = {
+    ssl : true
+},
     _defaultClient = {
-        ip: '0.0.0.0'
-    };
+    ip : '0.0.0.0'
+};
 
 var API_URL = '//www.woopra.com/track/';
 
@@ -36,7 +36,7 @@ function buildUrlParams(params, prefix) {
         key,
         p = [];
 
-    if (typeof params === 'undefined') {
+    if ( typeof params === 'undefined') {
         return;
     }
 
@@ -47,7 +47,6 @@ function buildUrlParams(params, prefix) {
     }
     return p.join('&');
 }
-
 
 function Woopra(key, options) {
     if (!key) {
@@ -61,7 +60,7 @@ function Woopra(key, options) {
 }
 
 Woopra.prototype = {
-    initialize: function() {
+    initialize : function() {
         this._client = _extend({}, _defaultClient);
         this._visitor = {};
         this.options = {};
@@ -71,7 +70,7 @@ Woopra.prototype = {
      * Sends tracking/identify requests to Woopra.  All requests will include
      * visitor properties and client options data
      */
-    request: function(endpoint, data, cb) {
+    request : function(endpoint, data, cb) {
         var protocol = this.options.ssl ? 'https' : 'http',
             method = this.options.ssl ? https.get : http.get,
             _data = data || {},
@@ -102,13 +101,15 @@ Woopra.prototype = {
 
         params.push(buildUrlParams(nonPrefixedEventProps));
 
-        return method(protocol + ':' + API_URL + endpoint + '?' + params.join('&'), function(res) {
-            if (typeof cb === 'function') {
-                cb(null, res.statusCode);
-            }
-        }).on('error', function(e) {
-            if (typeof cb === 'function') {
-                cb(e, null);
+        return method(protocol + ':' + API_URL + endpoint + '?' + params.join('&'), function(error, response) {
+            if (error) {
+                if ( typeof cb === 'function') {
+                    cb(res.statusCode, null);
+                }
+            } else if (response) {
+                if ( typeof cb === 'function') {
+                    cb(null, res.statusCode);
+                }
             }
         });
     },
@@ -116,11 +117,10 @@ Woopra.prototype = {
     /**
      * Sets configuration options
      */
-    config: function(properties) {
-        if (typeof properties === 'undefined') {
+    config : function(properties) {
+        if ( typeof properties === 'undefined') {
             return this.options;
-        }
-        else {
+        } else {
             _extend(this.options, properties);
         }
 
@@ -135,14 +135,13 @@ Woopra.prototype = {
      * referer: document.referrer,
      * cookie
      */
-    client: function(properties) {
-        if (typeof properties === 'undefined') {
+    client : function(properties) {
+        if ( typeof properties === 'undefined') {
             return _extend(this._client, {
-                website: this.projectKey,
-                app: 'node'
+                website : this.projectKey,
+                app : 'node'
             });
-        }
-        else {
+        } else {
             _extend(this._client, properties);
         }
     },
@@ -150,12 +149,10 @@ Woopra.prototype = {
     /**
      * Sets visitor properties, does not send a HTTP request to Woopra
      */
-    identify: function(id, properties) {
-        if (typeof id === 'object') {
+    identify : function(id, properties) {
+        if ( typeof id === 'object') {
             _extend(this._visitor, id);
-        }
-
-        else {
+        } else {
             _extend(this._visitor, properties);
             this._visitor.email = id;
         }
@@ -166,8 +163,8 @@ Woopra.prototype = {
     /**
      * Identifies a user with Woopra without creating an event
      */
-    push: function(cb) {
-        return this.request('identify', {} , cb);
+    push : function(cb) {
+        return this.request('identify', {}, cb);
     },
 
     /**
@@ -177,16 +174,15 @@ Woopra.prototype = {
      * @param Object options Hash of event properties to track
      * @param Function cb Optional callback function
      */
-    track: function(name, properties, options) {
+    track : function(name, properties, options) {
         var cb,
             _hash,
             _opts = options || {},
             _cb = arguments[arguments.length - 1];
 
-        if (typeof options === 'function') {
+        if ( typeof options === 'function') {
             cb = options;
-        }
-        else if (typeof _cb === 'function') {
+        } else if ( typeof _cb === 'function') {
             cb = _cb;
         }
 
@@ -196,16 +192,16 @@ Woopra.prototype = {
         }
 
         return this.request('ce', {
-            timestamp: _opts.timestamp,
-            event: name,
-            eventData: properties
+            timestamp : _opts.timestamp,
+            event : name,
+            eventData : properties
         }, cb);
     },
 
     /**
      * Clears client data and visitor properties
      */
-    reset: function() {
+    reset : function() {
         this.initialize();
     }
 };

@@ -3,7 +3,7 @@
   xmlns:ti="http://ti.appcelerator.org">
   <id>com.stepupapps.tiwoopra.example</id>
   <name>com.stepupapps.tiwoopra.example</name>
-  <version>0.0.1</version>
+  <version>1.0.4</version>
   <publisher>not specified</publisher>
   <url>http://www.stepupsoftware.co.uk</url>
   <description>not specified</description>
@@ -41,7 +41,7 @@
   </ios>
   <android 
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <manifest android:versionCode="1" android:versionName="0.0.1" package="com.stepupapps.tiwoopra.example">
+    <manifest android:versionCode="4" android:versionName="1.0.4" package="com.stepupapps.tiwoopra.example">
       <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="22"/>
       <application/>
     </manifest>
@@ -55,7 +55,7 @@
     <theme>default</theme>
   </mobileweb>
   <modules>
-    <module platform="commonjs" version="0.0.1">com.stepupapps.tiwoopra</module>
+    <module platform="commonjs" version="1.0.4">com.stepupapps.tiwoopra</module>
   </modules>
   <deployment-targets>
     <target device="android">true</target>
