@@ -1,0 +1,45 @@
+{
+  "name": "tiwoopra",
+  "version": "0.0.1",
+  "description": "Woopra Analytics for Titanium",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "titaniumManifest": {
+    "guid": "073a3c87-3e83-47a6-919b-2a3afcb2b2b6",
+    "moduleid": "com.stepupapps.tiwoopra",
+    "tisdk": "5.0.0.GA"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sharpred/tiwoopra.git"
+  },
+  "keywords": [
+    "titanium",
+    "analytics",
+    "woopra"
+  ],
+  "dependencies": {
+    "curry": "^1.2.0",
+    "entities": "^1.1.1",
+    "htmlparser2": "^3.8.0",
+    "woopra": "~0.2.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.2",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-titanium": "^0.3.1",
+    "grunt-titaniumifier": "^1.0.0-beta",
+    "grunt-zip": "^0.16.0",
+    "ti-console": "^0.1.4",
+    "tiapp.xml": "git://github.com/sharpred/tiapp.xml"
+  },
+  "author": "Paul Ryan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sharpred/tiwoopra/issues"
+  },
+  "homepage": "https://github.com/sharpred/tiwoopra",
+  "exampleAppId": "com.stepupapps.tiwoopra.example"
+}
